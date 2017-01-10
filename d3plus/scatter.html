@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+ 
+<head>
+  <meta charset="utf-8">
+  <title>Scatter example</title>
+  <script src="js/d3.js"></script>
+  <script src="js/d3plus.js"></script>
+</head>
+ 
+<body>
+
+<div id="viz"></div>
+<script>
+function scatter(name, maxsize, colours)
+{
+  // real data 
+  d3.csv(name, function(error, data) {
+    if (error) return console.error(error);
+
+	 var headerNames = d3.keys(data[0]);
+
+	  data.forEach(function(d)
+	  {
+		d3.keys(d).forEach(function(k){
+		  if(k != "Id"){ d[k] = +d[k] }
+		  //d[k] = +d[k]
+		})
+	  });
+
+	var largest = Math.max.apply(Math, data.x);
+	//console.log(data[0])
+  
+	var m = +maxsize
+    make_viz(data, headerNames, m, colours);
+
+  });
+
+  function make_viz(data, headerNames, sizemax, colour)
+  {
+	  var visualization = d3plus.viz()
+ 	    .container("#viz")
+		.data(data)
+		.type("scatter")
+		.size({"scale": {"max": sizemax}})
+		.id( headerNames[0] )
+		.color(headerNames[3])
+		.x({ "value":headerNames[1] })
+		.y({ "value":headerNames[2] })
+
+
+	  visualization
+		.font({ "family": "Helvetica", "size":20 })
+		.background("#ECECEC")
+		.font({ "color": "#444444" })
+		.tooltip(headerNames[2])
+
+	if( colour=="no" )
+		visualization.color(function(d){ return "#883388"; })
+	visualization.draw()             
+  }  
+}
+
+function getParamValue(paramName)
+{
+    var url = window.location.search.substring(1); //get rid of "?" in querystring
+    var qArray = url.split('&'); //get key-value pairs
+    for (var i = 0; i < qArray.length; i++) 
+    {
+        var pArr = qArray[i].split('='); //split key and value
+        if (pArr[0] == paramName) 
+            return pArr[1]; //return value
+    }
+}
+
+var name = getParamValue('name');
+var maxsize = getParamValue('maxsize');
+var colours = getParamValue('colours');
+scatter(name, maxsize, colours)
+
+  </script>
+</body>
+
+
+

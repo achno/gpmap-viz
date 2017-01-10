@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+ 
+<head>
+	<meta charset="utf-8">
+	<title>Visualisation</title>
+	<script src="js/plotly-latest.min.js"></script>
+	<script src="js/quickplots.js"></script>
+</head>
+ 
+<body>
+
+<div id="viz"></div>
+<script>
+function make_viz(name)
+{
+    loadJSON(name, function(response) {
+  
+        var predata = JSON.parse(response);
+		labels = get_labels(predata);
+
+		if( predata.type == "heatmap" )
+			data = make_heatmap(predata);
+		else if( predata.type == "histogram" )
+			data = make_histogram(predata);
+		else // if( predata.type == "scatter" )
+			data = make_scatter(predata, labels[2]);
+
+		var layout = set_layout(labels);
+		Plotly.newPlot('viz', data, layout);
+    });
+
+}
+
+function getParamValue(paramName)
+{
+    var url = window.location.search.substring(1); //get rid of "?" in querystring
+    var qArray = url.split('&'); //get key-value pairs
+    for (var i = 0; i < qArray.length; i++) 
+    {
+        var pArr = qArray[i].split('='); //split key and value
+        if (pArr[0] == paramName) 
+            return pArr[1]; //return value
+    }
+}
+
+var name = getParamValue('name');
+make_viz(name)
+
+</script>
+</body>

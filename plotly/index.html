@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<title>GPMapViz V.0.2</title>
+<meta charset="iso-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="styles/mediaqueries.css" type="text/css" media="all">
+<script src="scripts/jquery.1.9.0.min.js"></script>
+<script src="scripts/jquery-mobilemenu.min.js"></script>
+
+<style>
+.plot
+{
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    max-width: 600px;
+    height: 500px;
+}
+</style>
+
+</head>
+
+
+<body>
+<div class="wrapper row1">
+  <header id="header" class="clear">
+    <div id="hgroup">
+      <h1><a href="#">GPMapViz V.0.2</a></h1>
+      <h2>Genotype-Phenotype Maps Visualisation</h2>
+    </div>
+  </header>
+</div>
+
+
+<!-- content -->
+
+
+
+<div class="plot">
+    <iframe src="make_viz.html?name=data/scatter_1x0_tophalf.json", width="600" height="500", frameborder="0"></iframe>
+</div>
+
+<div class="plot">
+    <iframe src="make_viz.html?name=data/scatter_1x0_2.json", width="600" height="500", frameborder="0"></iframe>
+</div>
+
+<div class="plot">
+<iframe src="make_viz.html?name=data/rank_plot.json" width="600" height="500", frameborder="0"></iframe>
+</div>
+
+<div class="plot">
+<iframe src="make_viz.html?name=data/heatmap0x1.json" width="600" height="500", frameborder="0"></iframe>
+</div>
+
+<div class="plot">
+<iframe src="make_viz.html?name=data/heatmap0x2.json" width="600" height="500", frameborder="0"></iframe>
+</div>
+
+<div class="plot">
+<iframe src="make_viz.html?name=data/heatmap1x2.json" width="600" height="500", frameborder="0"></iframe>
+</div>
+
+<div class="plot">
+<iframe src="make_viz.html?name=data/hist0.json" width="600" height="500", frameborder="0"></iframe>
+</div>
+
+<div class="plot">
+<iframe src="make_viz.html?name=data/hist1.json" width="600" height="500", frameborder="0"></iframe>
+</div>
+
+<div class="plot">
+<iframe src="make_viz.html?name=data/hist2.json" width="600" height="500", frameborder="0"></iframe>
+</div>
+
+
+</div>
+
+
+<!-- ################################################################################################ -->
+<!-- Footer -->
+<div class="wrapper row4">
+<footer id="footer" class="clear">
+<p class="fl_left">Copyright &copy; 2016 - Some Rights Reserved.
+<p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+</footer>
+</div>
+</body>
+
+</html>

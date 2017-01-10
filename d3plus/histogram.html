@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+ 
+<head>
+  <meta charset="utf-8">
+  <title>Histogram example</title>
+  <script src="js/d3.js"></script>
+  <script src="js/d3plus.js"></script>
+</head>
+ 
+<body>
+
+<div id="viz"></div>
+<script>
+function histogram(name)
+{
+  // real data 
+  d3.csv(name, function(error, data) {
+    if (error) return console.error(error);
+
+	 var headerNames = d3.keys(data[0]);
+
+	  data.forEach(function(d)
+	  {
+		d3.keys(d).forEach(function(k){
+		  if(k != "Id"){ d[k] = +d[k] }
+		  //d[k] = +d[k]
+		})
+	  });
+
+	//console.log(data)  
+	//console.log(data[0])
+
+    make_viz(data, headerNames, type);
+  });
+
+  function make_viz(data, headerNames, type)
+  {
+	  var visualization = d3plus.viz()
+ 	    .container("#viz")
+		.data(data)
+		.type(type)
+		.text( headerNames[0] )
+		.id( headerNames[0] )
+//		.x( headerNames[1] )
+//		.y( headerNames[2] )
+		.x({ "value":headerNames[1] })
+		.y({ "value":headerNames[2] })
+		.font({ "family": "Helvetica", "size":20})
+		.background("#ECECEC")
+		.font({ "color": "#444444" })
+		.tooltip([ headerNames[1], headerNames[2] ])
+		//.tooltip(false)
+		.draw()             
+  }  
+}
+
+function getParamValue(paramName)
+{
+    var url = window.location.search.substring(1); //get rid of "?" in querystring
+    var qArray = url.split('&'); //get key-value pairs
+    for (var i = 0; i < qArray.length; i++) 
+    {
+        var pArr = qArray[i].split('='); //split key and value
+        if (pArr[0] == paramName) 
+            return pArr[1]; //return value
+    }
+}
+
+var name = getParamValue('name');
+var type = getParamValue('type');
+histogram(name, type)
+
+
+</script>
+</body>
+
+
